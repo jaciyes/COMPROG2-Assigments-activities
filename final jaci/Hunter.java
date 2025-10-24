@@ -1,31 +1,29 @@
-import java.util.*;
-
 public class Hunter extends Character {
 
     public Hunter(String name) {
-        super(name, 110, 60, 120);
+        super(name, 120, 60, 100);
     }
 
     @Override
     public void primarySkill(Character target) {
-        if (sp < 30) {
-            System.out.println("Not enough SP for Aimed Shot!");
+        if (sp < 20) {
+            System.out.println("Not enough SP for Power Shot!");
             return;
         }
-        sp -= 30;
-        int damage = new Random().nextInt(16) + 35; // 35–50 damage
+        sp -= 20;
+        int damage = 35;
         target.hp -= damage;
-        System.out.println(name + " uses Aimed Shot! Deals " + damage + " powerful damage!");
+        System.out.println(name + " uses Power Shot! Deals " + damage + " damage!");
     }
 
     @Override
     public void secondarySkill() {
-        if (sp < 30) {
-            System.out.println("Not enough SP for Deflect!");
+        if (sp < 10) {
+            System.out.println("Not enough SP for Focus!");
             return;
         }
-        sp -= 30;
-        defending = true;
-        System.out.println(name + " uses Deflect! Greatly increases dodge chance for 3 turns!");
+        sp -= 10;
+        sp = Math.min(maxSP, sp + 25);
+        System.out.println(name + " focuses and restores stamina!");
     }
 }
