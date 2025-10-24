@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Scanner;
 
 public abstract class Character {
     protected String name;
@@ -27,9 +27,9 @@ public abstract class Character {
             return;
         }
         sp -= 2;
-        int damage = new Random().nextInt(11) + 10; // 10–20 damage
+        int damage = 15; // fixed damage for simplicity
         if (target.defending) {
-            damage *= 0.5;
+            damage = damage / 2;
         }
         target.hp -= damage;
         System.out.println(name + " attacks " + target.name + " for " + damage + " damage!");
@@ -53,12 +53,12 @@ public abstract class Character {
         int choice = sc.nextInt();
 
         if (choice == 1 && healingPotions > 0) {
-            int heal = new Random().nextInt(31) + 30; // 30–60 heal
+            int heal = 40;
             hp = Math.min(maxHP, hp + heal);
             healingPotions--;
             System.out.println(name + " healed for " + heal + " HP!");
         } else if (choice == 2 && manaPotions > 0) {
-            int restore = new Random().nextInt(31) + 20; // 20–50 restore
+            int restore = 30;
             mp = Math.min(maxMP, mp + restore);
             manaPotions--;
             System.out.println(name + " restored " + restore + " MP!");
@@ -67,9 +67,18 @@ public abstract class Character {
         }
     }
 
+    public void getPotion() {
+        if (Math.random() < 0.5) {
+            healingPotions++;
+            System.out.println("You got a Healing Potion!");
+        } else {
+            manaPotions++;
+            System.out.println("You got a Mana Potion!");
+        }
+    }
+
     public void restoreResources() {
         sp = Math.min(maxSP, sp + 5);
-        mp = Math.min(maxMP, mp + 5);
         defending = false;
     }
 
