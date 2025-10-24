@@ -1,32 +1,30 @@
-import java.util.*;
-
 public class Warlock extends Character {
 
     public Warlock(String name) {
-        super(name, 100, 130, 80);
+        super(name, 100, 120, 80);
     }
 
     @Override
     public void primarySkill(Character target) {
-        if (mp < 30) {
+        if (mp < 25) {
             System.out.println("Not enough MP for Shadow Bolt!");
             return;
         }
-        mp -= 30;
-        int damage = new Random().nextInt(21) + 30; // 30–50 damage
+        mp -= 25;
+        int damage = 40;
         target.hp -= damage;
-        System.out.println(name + " casts Shadow Bolt! Deals " + damage + " shadow damage and applies a DOT effect!");
+        System.out.println(name + " casts Shadow Bolt! Deals " + damage + " magic damage!");
     }
 
     @Override
     public void secondarySkill() {
-        if (mp < 40) {
-            System.out.println("Not enough MP for Healthstone!");
+        if (mp < 20) {
+            System.out.println("Not enough MP for Heal!");
             return;
         }
-        mp -= 40;
-        int heal = (int)(maxHP * 0.4);
+        mp -= 20;
+        int heal = 30;
         hp = Math.min(maxHP, hp + heal);
-        System.out.println(name + " uses Healthstone! Restores " + heal + " HP!");
+        System.out.println(name + " uses Heal! Restores " + heal + " HP!");
     }
 }
